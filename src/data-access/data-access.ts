@@ -16,4 +16,14 @@ export class DataAccess extends GenericDataAccess<MessageModel, Message>{
         ): Promise<HydratedMessageDoc []> =>{
         return await this.model.find({ recipient : recipientId })
     }
+
+    public findSentMessageAndHide = async(messageId: string
+        ): Promise<HydratedMessageDoc | null> =>{
+            return await this.model.findByIdAndUpdate(messageId, {showSender: false})
+    }
+    
+    public findReceivedMessageAndHide = async(messageId: string
+        ): Promise<HydratedMessageDoc | null> =>{
+            return await this.model.findByIdAndUpdate(messageId, { showRecipient: false })
+    }
 }

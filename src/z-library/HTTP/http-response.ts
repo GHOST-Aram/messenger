@@ -55,7 +55,7 @@ export class HttpResponse{
     }
 
     public respondWithDeletedResource = (id: string, res: Response) =>{
-        res.status(200).json({ message: 'Deleted',id })
+        res.status(200).json({ id })
     }
 
     public respondWithForbidden = (res: Response) =>{

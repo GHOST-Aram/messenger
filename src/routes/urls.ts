@@ -36,6 +36,24 @@ export const routesWrapper = (controller: Controller): Router =>{
     router.patch('/sender/:id', controller.respondWithMethodNotAllowed)
     router.patch('/recipient/:id', controller.respondWithMethodNotAllowed)
     router.patch('/:id', controller.respondWithMethodNotAllowed)
+    
+    router.delete('/', controller.respondWithMethodNotAllowed)
+    router.delete('/sender/:id', controller.respondWithMethodNotAllowed)
+    router.delete('/recipient/:id', controller.respondWithMethodNotAllowed)
+    router.delete('/sent', controller.respondWithMethodNotAllowed)
+    router.delete('/sent/:id', 
+        validator.validateReferenceId('id', { required: true }),
+        validator.handleValidationErrors,
+        controller.hideMessageFromSender
+    )
+    router.delete('/received', controller.respondWithMethodNotAllowed)
+    router.delete('/received/:id', 
+        validator.validateReferenceId('id', { required: true }),
+        validator.handleValidationErrors,
+        controller.hideMessageFromReceiver
+    )
 
+    router.delete('/:id', controller.respondWithMethodNotAllowed)
+    
     return router
 }

@@ -84,7 +84,6 @@ export class ResponseAssertion{
 
     public respondsWithDeletedResource = (response: Response) =>{
         expect(response.body.id).toMatch(/^[a-fA-F0-9]{24}$/)
-        expect(response.body.message).toMatch(/deleted/i)
     }
 
     public respondsWithToken = (response: Response) => {

@@ -31,4 +31,36 @@ export class Controller extends GenericController<DataAccess>{
             next(error)
         }
     }
+
+    public hideMessageFromSender = async(req: Request, res: Response, next: NextFunction) =>{
+        const messageId = req.params.id
+
+        try {
+            const hiddenMessage = await this.dataAccess.findSentMessageAndHide(messageId)
+
+            if(hiddenMessage){
+                res.status(200).json({id: hiddenMessage.id})
+            } else {
+                res.status(404).json('Not found')
+            }
+        } catch (error) {
+            
+        }
+    }
+
+    public hideMessageFromReceiver = async(req: Request, res: Response, next: NextFunction) =>{
+        const messageId = req.params.id
+
+        try {
+            const hiddenMessage = await this.dataAccess.findReceivedMessageAndHide(messageId)
+
+            if(hiddenMessage){
+                res.status(200).json({id: hiddenMessage.id})
+            } else {
+                res.status(404).json('Not found')
+            }
+        } catch (error) {
+            
+        }
+    }
 }
