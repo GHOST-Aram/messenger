@@ -4,6 +4,7 @@ export interface Message{
     sender: ObjectId
     recipient: ObjectId
     content: string
+    status?: string
     createdAt?: Date
 }
 
@@ -23,6 +24,11 @@ export const schema = new Schema<Message,MessageModel>({
     content: {
         type: String,
         required: true
+    },
+    status: {
+        type: String,
+        enum: ['sent', 'deleted-by-sender', 'deleted-by-recipient'],
+        default: 'sent'  
     },
     createdAt:{
         type: Date,
