@@ -18,4 +18,17 @@ export class Controller extends GenericController<DataAccess>{
             next(error)
         }
     }
+
+    public  getByRecipientId = async(req: Request, res: Response, next: NextFunction) =>{
+        const sender = req.params.id
+        const pagination = this.paginate(req)
+
+        try{
+            const messages =  await this.dataAccess.findByRecipientId(sender, pagination)
+
+            this.respondWithFoundResource(messages, res)
+        } catch (error) {
+            next(error)
+        }
+    }
 }

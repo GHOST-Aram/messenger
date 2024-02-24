@@ -11,4 +11,9 @@ export class DataAccess extends GenericDataAccess<MessageModel, Message>{
         ): Promise<HydratedMessageDoc []> =>{
         return await this.model.find({ sender : senderId })
     }
+
+    public findByRecipientId = async( recipientId: string, paginator: Paginator 
+        ): Promise<HydratedMessageDoc []> =>{
+        return await this.model.find({ recipient : recipientId })
+    }
 }

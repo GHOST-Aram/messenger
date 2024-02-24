@@ -21,5 +21,10 @@ export const routesWrapper = (controller: Controller): Router =>{
         controller.getBySenderId
     )
 
+    router.get('/recipient/:id', validator.validateReferenceId('id', { required: true }),
+        validator.handleValidationErrors,
+        controller.getByRecipientId
+    )
+
     return router
 }

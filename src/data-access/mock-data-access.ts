@@ -24,6 +24,11 @@ export class MockDataAccess extends DataAccess{
         async( senderId: string, paginator: Paginator ): Promise<HydratedMessageDoc[]> =>{
             return generateFakeDocs(paginator.limit)
     })
+
+    public findByRecipientId = jest.fn(
+        async( recipientId: string, paginator: Paginator ): Promise<HydratedMessageDoc[]> =>{
+            return generateFakeDocs(paginator.limit)
+    })
 }
 
 const generateFakeDocs = (limit: number): HydratedMessageDoc[] =>{
