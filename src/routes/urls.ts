@@ -11,27 +11,31 @@ export const routesWrapper = (controller: Controller): Router =>{
         controller.addNew
     )
 
+    
+    router.get('/', controller.respondWithMethodNotAllowed)
+    
+    router.get('/sender/:id', validator.validateReferenceId('id', { required: true }),
+        validator.handleValidationErrors,
+        controller.getBySenderId
+    )
+    router.get('/recipient/:id', validator.validateReferenceId('id', { required: true }),
+        validator.handleValidationErrors,
+        controller.getByRecipientId
+    )
     router.get('/:id', validator.validateReferenceId('id', { required: true }),
         validator.handleValidationErrors,
         controller.getOne
     )
 
-    router.get('/', controller.respondWithMethodNotAllowed)
-
-    router.get('/sender/:id', validator.validateReferenceId('id', { required: true }),
-        validator.handleValidationErrors,
-        controller.getBySenderId
-    )
-
-    router.get('/recipient/:id', validator.validateReferenceId('id', { required: true }),
-        validator.handleValidationErrors,
-        controller.getByRecipientId
-    )
-
     router.put('/', controller.respondWithMethodNotAllowed)
-    router.put('/:id', controller.respondWithMethodNotAllowed)
     router.put('/sender/:id', controller.respondWithMethodNotAllowed)
     router.put('/recipient/:id', controller.respondWithMethodNotAllowed)
+    router.put('/:id', controller.respondWithMethodNotAllowed)
+    
+    router.patch('/', controller.respondWithMethodNotAllowed)
+    router.patch('/sender/:id', controller.respondWithMethodNotAllowed)
+    router.patch('/recipient/:id', controller.respondWithMethodNotAllowed)
+    router.patch('/:id', controller.respondWithMethodNotAllowed)
 
     return router
 }
