@@ -3,8 +3,15 @@ import { app } from "./config/test.config";
 import { assert } from "../z-library/testing/response-assertion";
 import request from "supertest"
 
-describe('Messenger | GET One by Schedule Id', () => {
+describe('Messenger | GET by Message Id', () => {
     //Get by assetId
+    test('Responds with method not allowed, status 405: Reject Get all' ,
+        async() =>{
+            const response = await request(app).get('/messages')
+
+            assert.respondsWithMethodNotAllowed(response)
+        }
+    )
 
     test('Responds with validation errors, status 400: Invalid id', 
         async() => {
