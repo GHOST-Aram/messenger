@@ -28,5 +28,10 @@ export const routesWrapper = (controller: Controller): Router =>{
         controller.getByRecipientId
     )
 
+    router.put('/', controller.respondWithMethodNotAllowed)
+    router.put('/:id', controller.respondWithMethodNotAllowed)
+    router.put('/sender/:id', controller.respondWithMethodNotAllowed)
+    router.put('/recipient/:id', controller.respondWithMethodNotAllowed)
+
     return router
 }

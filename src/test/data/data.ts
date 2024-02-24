@@ -8,9 +8,11 @@ export const postData = {
 
 export const invalidData = {
     sender: new mongo.ObjectId(),
-    content: ''
+    content: '',
+    showSender: 'false',
+    showRecipent: 'false'
 }
 
 export const patchData = {
-    status: 'deleted-by-sender'
+    showSender: false
 }
