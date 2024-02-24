@@ -4,7 +4,8 @@ export interface Message{
     sender: ObjectId
     recipient: ObjectId
     content: string
-    status?: string
+    showSender?: boolean
+    showRecipient?: boolean
     createdAt?: Date
 }
 
@@ -25,10 +26,13 @@ export const schema = new Schema<Message,MessageModel>({
         type: String,
         required: true
     },
-    status: {
-        type: String,
-        enum: ['sent', 'deleted-by-sender', 'deleted-by-recipient'],
-        default: 'sent'  
+    showRecipient:{
+        type: Boolean,
+        default: true
+    },
+    showSender: {
+        type: Boolean,
+        default: true
     },
     createdAt:{
         type: Date,
