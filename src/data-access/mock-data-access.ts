@@ -1,6 +1,7 @@
 import { DataAccess } from "./data-access";
 import { HydratedMessageDoc, Message, MessageModel } from "./model";
 import { postData } from "../test/data/data";
+import { Paginator } from "../z-library/HTTP/http-response";
 
 export class MockDataAccess extends DataAccess{
     constructor(model: MessageModel){
@@ -18,4 +19,20 @@ export class MockDataAccess extends DataAccess{
 
         return null
     })
+
+    public findBySenderId = jest.fn(
+        async( senderId: string, paginator: Paginator ): Promise<HydratedMessageDoc[]> =>{
+            return generateFakeDocs(paginator.limit)
+    })
+}
+
+const generateFakeDocs = (limit: number): HydratedMessageDoc[] =>{
+    const docs: HydratedMessageDoc[] = []
+
+    while(limit > 0){
+        docs.push(new Message(postData))
+        limit --
+    }
+
+    return docs
 }
